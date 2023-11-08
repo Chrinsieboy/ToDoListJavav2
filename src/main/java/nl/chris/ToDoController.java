@@ -1,6 +1,7 @@
 package nl.chris;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ToDoController {
     /**
@@ -11,126 +12,121 @@ public class ToDoController {
     // Instance variables
     // private ToDoWindow toDoWindow;
     // private Database database = new Database();
-    private ArrayList<Object> toDoItems = new ArrayList<>();
+    private ArrayList<ToDoItem> items = new ArrayList<>();
 
     /**
      * Constructor
      */
     public ToDoController() {
         System.out.println("ToDoController constructor called");
-        dummyData();
-        System.out.println(getToDoItems());
-
-        addItem("Item 4");
-
-        System.out.println(getToDoItems());
+        createDummyItems();
+        getItems();
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        editItem("Item 4", "Item 5");
-
-        System.out.println(getToDoItems());
+        addItem("Item 4", true, 4);
+        getItems();
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        removeItem("Item 1");
-        removeItem("Item 0");
+        editItem("Item 5", true, 1);
+        getItems();
 
-        System.out.println(getToDoItems());
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        removeItem(4);
+        getItems();
     }
 
     /**
      * Dummy data
      */
-    public void dummyData() {
-        toDoItems.add("Item 1");
-        toDoItems.add("Item 2");
-        toDoItems.add("Item 3");
+    public void createDummyItems() {
+        items.add(new ToDoItem() {{
+            addItem("Item 1", false, 1);
+        }});
+        items.add(new ToDoItem() {{
+            addItem("Item 2", false, 2);
+        }});
+        items.add(new ToDoItem() {{
+            addItem("Item 3", true, 3);
+        }});
     }
 
     /**
-     * Get to do items
+     * Get todo items
      * @return - Returns an ArrayList of to do items
      */
-    public ArrayList<Object> getToDoItems() {
+    public ArrayList<ToDoItem> getItems() {
         System.out.println("---=== ToDoController.getToDoItems called ===---");
-        return toDoItems;
+        for (ToDoItem item : items) {
+            System.out.println(item.getName() + " - " + item.getIsDone() + " - " + item.getId());
+        }
+        return items;
 
         // TODO: Get items from database
         // return database.getToDoItems();
     }
 
     /**
-     * Add a to do item
+     * Add a todo item
      * @param name - The name of the to do item
+     * @param isDone - The isDone of the to do item
      */
-    public void addItem(String name) {
+    public void addItem(String name, Boolean isDone, Integer id) {
         System.out.println("---=== ToDoController.addItem called ===---");
         System.out.println("Name: " + name);
 
-        toDoItems.add(name);
+        items.add(new ToDoItem() {{
+            addItem(name, isDone, id);
+        }});
     }
 
     /**
-     * Edit a to do item
-     * @param name - The name of the to do item
+     * Edit a todo item
+     * @param editName - The new name of the to do item
+     * @param editIsDone - The new isDone of the to do item
      */
-    public void editItem(String name, String editName) {
+    public void editItem(String editName, Boolean editIsDone, Integer id) {
         System.out.println("---=== ToDoController.editItem called ===---");
-        System.out.println("Name: " + name);
 
-        // Find the index of the item to edit
-        int indexToEdit = -1;
-        for (int i = 0; i < toDoItems.size(); i++) {
-            Object item = toDoItems.get(i);
-            if (item instanceof String && ((String) item).equals(name)) {
-                indexToEdit = i;
-                break;
+        // Find item
+        for (ToDoItem item : items) {
+            if (Objects.equals(item.getId(), id)) {
+                item.addItem(editName, editIsDone, id);
+                System.out.println("Name: " + item.getName());
+                System.out.println("isDone: " + item.getIsDone());
+                return;
             }
-        }
-
-        // Check if the item was found
-        if (indexToEdit >= 0) {
-            // Edit the item at the found index
-            toDoItems.set(indexToEdit, editName);
-            System.out.println("Item edited successfully.");
-        } else {
-            System.out.println("Item not found for editing.");
         }
     }
 
     /**
      * Remove a to do item
-     * @param name - The name of the to do item
+     * @param id - The id of the to do item
      */
-    public void removeItem(String name) {
+    public void removeItem(Integer id) {
         System.out.println("---=== ToDoController.removeItem called ===---");
-        System.out.println("Removing: " + name);
 
-        // Find the index of the item to remove
-        int indexToRemove = -1;
-        for (int i = 0; i < toDoItems.size(); i++) {
-            Object item = toDoItems.get(i);
-            if (item instanceof String && ((String) item).equals(name)) {
-                indexToRemove = i;
-                break;
+        // Find item
+        for (ToDoItem item : items) {
+            if (Objects.equals(item.getId(), id)) {
+                items.remove(item);
+                System.out.println("removed item with id: " + id);
+                return;
             }
-        }
-
-        // Check if the item was found
-        if (indexToRemove >= 0) {
-            toDoItems.remove(indexToRemove);
-            System.out.println("Item removed successfully.");
-        } else {
-            System.out.println("Item not found for removal.");
         }
     }
 }
