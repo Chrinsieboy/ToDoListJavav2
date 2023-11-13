@@ -60,7 +60,7 @@ public class ToDoController {
      * @param editIsDone - The new isDone of the to do item
      */
     public void editItem(String editName, Boolean editIsDone, ToDoItem item) {
-        item.setName(editName);
+        item.setItemName(editName);
         item.setIsDone(editIsDone);
 
         database.editToDoItem(item.getId(), editName, editIsDone);
