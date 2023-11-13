@@ -45,13 +45,10 @@ public class ToDoController {
      * Add a todo item
      * @param name - The name of the to do item
      */
-    public ToDoItem addItem(String name, Integer id) {
+    public void addItem(String name, Integer id) {
         ToDoItem item = new ToDoItem(name, false, id);
-
         database.addToDoItem(item);
-
         items.add(item);
-        return item;
     }
 
     /**
