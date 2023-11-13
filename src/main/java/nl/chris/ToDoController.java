@@ -11,7 +11,7 @@ public class ToDoController {
      * It handles the logic and updates the view.
      */
 
-    private Database database = new Database();
+    private final Database database = new Database();
     private ArrayList<ToDoItem> items = new ArrayList<>();
 
     /**
