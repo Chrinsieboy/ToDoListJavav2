@@ -1,7 +1,7 @@
 package nl.chris.views;
 
-import jdk.jfr.DataAmount;
 import nl.chris.Database;
+import nl.chris.ToDoController;
 import nl.chris.ToDoItem;
 import nl.chris.ToDoList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ToDoDetail extends JFrame {
     private final Database database = new Database();
     private final ToDoList list = new ToDoList(database.getToDoItems());
-    public ToDoDetail(ToDoItem item) {
+    public ToDoDetail(ToDoItem item, ToDoController toDoController) {
         super("ToDo Detail");
         // Create a new window
         JFrame editFrame = new JFrame("Edit item");
@@ -30,9 +30,10 @@ public class ToDoDetail extends JFrame {
         // Create a save button
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
-            item.setItemName(editTextField.getText());
-            item.setIsDone(editCheckBox.isSelected());
-            database.editToDoItem(item.getId(), item.getName(), item.getIsDone());
+//            item.setItemName(editTextField.getText());
+//            item.setIsDone(editCheckBox.isSelected());
+            toDoController.editItem(editTextField.getText(), editCheckBox.isSelected(), item);
+//            database.editToDoItem(item.getId(), item.getName(), item.getIsDone());
 
             ArrayList<ToDoItem> items = database.getToDoItems();
             list.refreshList(items);

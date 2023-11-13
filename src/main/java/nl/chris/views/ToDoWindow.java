@@ -115,7 +115,7 @@ public class ToDoWindow extends JFrame {
                 JOptionPane.showMessageDialog(null, "You need to select an item to edit");
             } else {
                 for (ToDoItem item : selectedItems) {
-                    new ToDoDetail(item);
+                    new ToDoDetail(item, toDoController);
                 }
                 pack();
                 this.revalidate();

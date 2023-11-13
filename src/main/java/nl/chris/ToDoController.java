@@ -59,15 +59,11 @@ public class ToDoController {
      * @param editName - The new name of the to do item
      * @param editIsDone - The new isDone of the to do item
      */
-    public void editItem(String editName, Boolean editIsDone, Integer id) {
+    public void editItem(String editName, Boolean editIsDone, ToDoItem item) {
+        item.setName(editName);
+        item.setIsDone(editIsDone);
 
-        // Find item
-        for (ToDoItem item : items) {
-            if (Objects.equals(item.getId(), id)) {
-                System.out.println("There was an item edited");
-                return;
-            }
-        }
+        database.editToDoItem(item.getId(), editName, editIsDone);
     }
 
     /**
