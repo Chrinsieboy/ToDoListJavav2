@@ -18,23 +18,7 @@ public class ToDoController {
      * Constructor
      */
     public ToDoController() {
-//        createDummyItems();
-
         new ToDoWindow(getItems("none"), this);
-    }
-
-    /**
-     * Dummy data
-     */
-    public void createDummyItems() {
-        addItem("Item 1", 1);
-        addItem("Item 2", 2);
-        addItem("Item 3", 3);
-        addItem("Item 4", 4);
-        addItem("Item 5", 5);
-        addItem("Item 6", 6);
-        addItem("Item 7", 7);
-        addItem("Item 8", 8);
     }
 
     /**
@@ -91,12 +75,10 @@ public class ToDoController {
      * @param id - The id of the to do item
      */
     public void removeItem(Integer id) {
-        // Find item
         for (ToDoItem item : items) {
             if (Objects.equals(item.getId(), id)) {
                 items.remove(item);
                 database.removeToDoItem(item);
-                System.out.println("removed item with id: " + id);
                 return;
             }
         }

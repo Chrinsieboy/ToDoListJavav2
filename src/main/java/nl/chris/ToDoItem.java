@@ -26,7 +26,6 @@ public class ToDoItem extends JPanel {
         JPanel panel = this;
 
         checkBox = new JCheckBox();
-        System.out.println(getIsDone());
         if (getIsDone()) {
             checkBox.setText("✔ " + getName());
         } else {
@@ -128,8 +127,6 @@ public class ToDoItem extends JPanel {
     }
 
     public Boolean getIsSelected() {
-//        System.out.println("Item: " + this.name);
-//        System.out.println("isSelected: " + this.isSelected);
         return this.isSelected;
     }
 }

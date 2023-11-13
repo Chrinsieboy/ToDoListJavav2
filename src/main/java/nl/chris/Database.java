@@ -37,7 +37,7 @@ public class Database {
                 list.add(toDoItem);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return list;
     }
@@ -127,7 +127,6 @@ public class Database {
 
             while (rs.next()) {
                 ToDoItem toDoItem = new ToDoItem(rs.getString("name"), rs.getBoolean("isDone"), rs.getInt("id"));
-                System.out.println("Is this item done: " + toDoItem.getIsDone());
                 list.add(toDoItem);
             }
         } catch (Exception e) {

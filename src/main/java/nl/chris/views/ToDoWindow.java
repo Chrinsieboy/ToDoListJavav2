@@ -167,7 +167,6 @@ public class ToDoWindow extends JFrame {
 
         button.addActionListener(e -> {
             this.inOrder = !this.inOrder;
-            System.out.println(this.inOrder);
             if (inOrder) {
                 toDoList.refreshList(toDoController.getItems("status"));
             } else {
