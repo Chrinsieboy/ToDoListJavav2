@@ -75,7 +75,7 @@ public class ToDoWindow extends JFrame {
     /**
      * Add Button
      */
-    public JPanel addButton() {
+    public JButton addButton() {
         JButton button = new JButton("Add");
         button.setSize(1, 1);
         button.setVisible(true);
@@ -97,7 +97,7 @@ public class ToDoWindow extends JFrame {
         panel.add(button);
         panel.setVisible(true);
 
-        return panel;
+        return button;
     }
 
     /**
