@@ -44,15 +44,6 @@ public class ToDoWindow extends JFrame {
         return textField;
     }
 
-    public JPanel buttonPanel() {
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addButton());
-        buttonPanel.add(editButton());
-        buttonPanel.add(removeItem());
-        buttonPanel.add(changeOrder());
-        return buttonPanel;
-    }
-
     /**
      * Get the items that are selected by checkbox
      */
@@ -70,6 +61,18 @@ public class ToDoWindow extends JFrame {
     }
 
     /**
+     * Button panel
+     */
+    public JPanel buttonPanel() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(addButton());
+        buttonPanel.add(editButton());
+        buttonPanel.add(removeItem());
+        buttonPanel.add(changeOrder());
+        return buttonPanel;
+    }
+
+    /**
      * Add Button
      */
     public JPanel addButton() {
@@ -78,7 +81,6 @@ public class ToDoWindow extends JFrame {
         button.setVisible(true);
 
         button.addActionListener(e -> {
-
             if (textField.getText().isEmpty()) {
                 return;
             } else {
@@ -86,7 +88,6 @@ public class ToDoWindow extends JFrame {
                 toDoList.refreshList(toDoController.getItems("none"));
                 textField.setText("");
             }
-
             pack();
             this.revalidate();
             this.repaint();
