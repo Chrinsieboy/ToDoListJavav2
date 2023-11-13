@@ -12,6 +12,9 @@ public class ToDoItem extends JPanel {
 
     /**
      * Constructor
+     * @param name - name of the item
+     * @param isDone - isDone of the item
+     * @param id - id of the item
      */
     public ToDoItem(String name, Boolean isDone, Integer id) {
         super();
@@ -22,6 +25,10 @@ public class ToDoItem extends JPanel {
         this.isSelected = false;
     }
 
+    /**
+     * Create a panel with a checkbox
+     * @return - Returns the panel with the checkbox
+     */
     public JPanel ItemPanel() {
         JPanel panel = this;
 
@@ -45,8 +52,6 @@ public class ToDoItem extends JPanel {
 
         return panel;
     }
-
-    // Adders
 
     /**
      * Set name
@@ -79,12 +84,15 @@ public class ToDoItem extends JPanel {
         return this.isDone;
     }
 
+    /**
+     * Set id
+     * @param isSelected - isSelected of the item that will be set
+     * @return = Returns the new isSelected of the item
+     */
     public Boolean setSelected(Boolean isSelected) {
         this.isSelected = isSelected;
         return this.isSelected;
     }
-
-    // Getters
 
     /**
      * Get name
@@ -104,11 +112,16 @@ public class ToDoItem extends JPanel {
 
     /**
      * Get id
+     * @return - Returns the id of the item
      */
     public Integer getId() {
         return this.id;
     }
 
+    /**
+     * Get isSelected
+     * @return - Returns the isSelected of the item
+     */
     public Boolean getIsSelected() {
         return this.isSelected;
     }
