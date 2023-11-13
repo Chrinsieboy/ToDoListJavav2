@@ -24,7 +24,7 @@ public class ToDoDetail extends JFrame {
         editTextField.setText(item.getName());
 
         // Create a new checkbox
-        JCheckBox editCheckBox = new JCheckBox();
+        JCheckBox editCheckBox = new JCheckBox("Done");
         editCheckBox.setSelected(item.getIsDone());
 
         // Create a save button
