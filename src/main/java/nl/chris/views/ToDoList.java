@@ -1,4 +1,6 @@
-package nl.chris;
+package nl.chris.views;
+
+import nl.chris.ToDoItem;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -20,9 +22,9 @@ public class ToDoList extends JPanel {
         panel.setVisible(true);
     }
 
-    public void refreshList(ArrayList<ToDoItem> list) {
+    public void refreshList(ArrayList<ToDoItem> items) {
         removeAll();
-        for (ToDoItem item : list) {
+        for (ToDoItem item : items) {
             this.panel.add(item.ItemPanel());
         }
     }

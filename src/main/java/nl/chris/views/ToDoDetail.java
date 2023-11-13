@@ -3,7 +3,6 @@ package nl.chris.views;
 import nl.chris.Database;
 import nl.chris.ToDoController;
 import nl.chris.ToDoItem;
-import nl.chris.ToDoList;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -30,11 +29,9 @@ public class ToDoDetail extends JFrame {
         // Create a save button
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
-//            item.setItemName(editTextField.getText());
-//            item.setIsDone(editCheckBox.isSelected());
             toDoController.editItem(editTextField.getText(), editCheckBox.isSelected(), item);
-//            database.editToDoItem(item.getId(), item.getName(), item.getIsDone());
 
+            // Refresh the list
             ArrayList<ToDoItem> items = database.getToDoItems();
             list.refreshList(items);
             editFrame.dispose();

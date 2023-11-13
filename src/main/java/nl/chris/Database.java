@@ -66,7 +66,7 @@ public class Database {
 
     /**
      * Edit a ToDoItem object in the database
-     * @param toDoItem - The ToDoItem object to edit
+     * @param id - The id of the ToDoItem
      * @param name - The new name of the ToDoItem
      * @param isDone - The new status of the ToDoItem
      */

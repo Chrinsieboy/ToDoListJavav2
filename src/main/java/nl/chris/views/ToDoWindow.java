@@ -2,7 +2,6 @@ package nl.chris.views;
 
 import nl.chris.ToDoController;
 import nl.chris.ToDoItem;
-import nl.chris.ToDoList;
 
 import javax.swing.*;
 import java.awt.*;
