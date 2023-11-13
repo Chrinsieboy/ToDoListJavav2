@@ -49,18 +49,6 @@ public class ToDoItem extends JPanel {
     // Adders
 
     /**
-     * Add new item
-     * @param name - name of the item
-     * @return - Returns the name of the item
-     */
-    public String addItem(String name, Boolean isDone, Integer id) {
-        this.name = name;
-        this.isDone = isDone;
-        this.id = id;
-        return this.name;
-    }
-
-    /**
      * Set name
      * @param name - name of the item that will be set
      * @return - Returns the new name of the item
@@ -89,11 +77,6 @@ public class ToDoItem extends JPanel {
             checkBox.setText("❌ " + getName());
         }
         return this.isDone;
-    }
-
-    public Integer setId(Integer id) {
-        this.id = id;
-        return this.id;
     }
 
     public Boolean setSelected(Boolean isSelected) {
