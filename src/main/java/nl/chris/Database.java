@@ -14,10 +14,19 @@ public class Database {
     private String DATABASE_USERNAME = dotenv.get("DB_USER");
     private String DATABASE_PASSWORD = dotenv.get("DB_PASSWORD");
 
-    private Connection con;
-    private Statement stmt;
-    private ResultSet rs;
-    private PreparedStatement ps;
+    /**
+     * Get Connection
+     */
+    public Connection connectDatabase() {
+        Connection con;
+        try {
+             con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             return con;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     /**
      * Get all ToDoItem objects from the database
@@ -27,11 +36,10 @@ public class Database {
         ArrayList<ToDoItem> list = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            stmt = con.createStatement();
+            Connection con = connectDatabase();
+            Statement stmt = con.createStatement();
 
-            rs = stmt.executeQuery("SELECT * FROM todoitems");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM todoitems");
             while (rs.next()) {
                 ToDoItem toDoItem = new ToDoItem(rs.getString("name"), rs.getBoolean("isDone"), rs.getInt("id"));
                 list.add(toDoItem);
@@ -49,13 +57,13 @@ public class Database {
     public void addToDoItem(ToDoItem toDoItem) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            Connection con = connectDatabase();
 
             String name = toDoItem.getName();
             boolean isDone = toDoItem.getIsDone();
 
-            stmt = con.createStatement();
-            ps = con.prepareStatement("INSERT INTO todoitems (name, isDone) VALUES (?, ?)");
+            Statement stmt = con.createStatement();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO todoitems (name, isDone) VALUES (?, ?)");
             ps.setString(1, name);
             ps.setBoolean(2, isDone);
             ps.executeUpdate();
@@ -72,10 +80,9 @@ public class Database {
      */
     public void editToDoItem(Integer id, String name, Boolean isDone) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            Connection con = connectDatabase();
 
-            ps = con.prepareStatement("UPDATE todoitems SET name = ?, isDone = ? WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE todoitems SET name = ?, isDone = ? WHERE id = ?");
             ps.setString(1, name);
             ps.setBoolean(2, isDone);
             ps.setInt(3, id);
@@ -92,9 +99,9 @@ public class Database {
     public void removeToDoItem(ToDoItem toDoItem) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            Connection con = connectDatabase();
 
-            ps = con.prepareStatement("DELETE FROM todoitems WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM todoitems WHERE id = ?");
             ps.setInt(1, toDoItem.getId());
             ps.executeUpdate();
         } catch (Exception e) {
@@ -111,8 +118,8 @@ public class Database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-            stmt = con.createStatement();
-
+            Statement stmt = con.createStatement();
+            ResultSet rs;
             switch (sortBy) {
                 case "name":
                     rs = stmt.executeQuery("SELECT * FROM todoitems ORDER BY name ASC");
